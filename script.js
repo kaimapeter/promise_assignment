@@ -23,10 +23,10 @@ const handleUser = () => {
                     </div>
                 `;
             }).join(" ");
-             root.style.display = "grid";
-    root.style.gridTemplateColumns = "1fr 1fr 1fr";
-    root.style.justifyContent = "center";
-    root.style.marginLeft = "auto";
+    //          root.style.display = "grid";
+    // root.style.gridTemplateColumns = "1fr 1fr 1fr";
+    // root.style.justifyContent = "center";
+    // root.style.marginLeft = "auto";
             // data.forEach((user) => {
             //     const userDiv = document.createElement("div");
             //     userDiv.classList.add("user");
@@ -43,7 +43,7 @@ const handleUser = () => {
 }
 
 async function fetchAndDisplayUsers() {
-  const apiUrl = "https://jsonplaceholder.typicode.com/users";
+  const apiUrl = "https://jsonplaceholder.typicode.com/posts";
    
 
   try {
@@ -53,49 +53,32 @@ async function fetchAndDisplayUsers() {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
 
-    const users = await response.json();
+    const post = await response.json();
     root.innerHTML = '';
 
-    root.innerHTML = users.map(user => {
+    root.innerHTML = post.slice(0,10).map(post => {
     //   const userDiv = document.createElement("div");
     //   userDiv.innerHTML = `
-    return ` <div class="use">
-        <ul>
-        <h2>${user.name} (${user.username})</h2>
-        <p><strong>ID:</strong> ${user.id}</p>
-        <p><strong>Email:</strong> ${user.email}</p>
-        <p><strong>Phone:</strong> ${user.phone}</p>
-        <p><strong>Website:</strong> <a href="http://${user.website}" target="_blank">${user.website}</a></p>
-        </ul>
-        
-        
-        <ul>
-        <h3>Address</h3>
-          <li><strong>Street:</strong> ${user.address.street}</li>
-          <li><strong>Suite:</strong> ${user.address.suite}</li>
-          <li><strong>City:</strong> ${user.address.city}</li>
-          <li><strong>Zipcode:</strong> ${user.address.zipcode}</li>
-          <li><strong>Geo:</strong> Lat: ${user.address.geo.lat}, Lng: ${user.address.geo.lng}</li>
-        </ul>
+    return    `<div class="user">
+                <h2>${post.title}</h2>
+                <p><strong>Author ID:</strong> ${post.userId}</p>
+                <p><strong>ID:</strong> ${post.id}</p>
+                <p>${post.body}</p>
+                <hr/>
+                </div>
+            `;
+            postList.appendChild(postDiv);
+        }).join(" ");
 
-        
-        <ul>
-        <h3>Company</h3>
-          <li><strong>Name:</strong> ${user.company.name}</li>
-          <li><strong>Catchphrase:</strong> "${user.company.catchPhrase}"</li>
-          <li><strong>BS:</strong> ${user.company.bs}</li>
-        </ul>
-        
-        </div>
-      `;
+    //   `;
      
-    }).join(" ");
-    root.style.display = "grid";
-    root.style.gridTemplateColumns = "1fr 1fr";
-    // root.style.gap = "20px";
-    root.style.justifyContent = "center";
-    root.style.marginLeft = "300px";
-    // root.style.alignContent = "center";
+    // }).join(" ");
+    // root.style.display = "grid";
+    // root.style.gridTemplateColumns = "1fr 1fr";
+    // // root.style.gap = "20px";
+    // root.style.justifyContent = "center";
+    // root.style.marginLeft = "300px";
+    // // root.style.alignContent = "center";
 
 
   } catch (error) {
